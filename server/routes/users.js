@@ -2,15 +2,15 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
-const config = require('../config/database');
-const User = require('../models/user');
-
-const event = require('../models/event');
-const request = require('request');
 const Promise = require('bluebird');
-const scrapetopsport = require('../scrapetopsport');
-const getpinnacle = require('../getpinnacle');
-const insertData = require('../insertDataToDb');
+
+const User = require('../models/user');
+const event = require('../models/event');
+
+const config = require('../config/database');
+const scrapetopsport = require('../utils/scrapetopsport');
+const getpinnacle = require('../utils/getpinnacle');
+const insertData = require('../utils/insertDataToDb');
 
 
 //Register
@@ -28,7 +28,7 @@ User.addUser(newUser, (err, user) => {
     } else {
         res.json({success: true, msg: 'User registered'});
     }
-});    
+});
 });
 
 //Authenticate

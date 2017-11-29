@@ -1,0 +1,89 @@
+<h2 class="page-header">Basketball</h2>
+
+<div class="card" *ngFor="let bet of bets">
+  <div class="card-body container">
+    <div style="width:90%">
+      <table class="table-sm" style="width:100%;">
+        <thead>
+          <tr>
+            <th scope="col" style="width:20%">Type</th>
+            <th scope="col" style="width:20%">Ratio</th>
+            <th scope="col" style="width:20%">Bookmaker</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th><a href={{bet.homeTeamOdds_URL}}>{{bet.homeTeamName}}</a></th>
+            <td>{{bet.homeTeamOdds}}</td>
+            <td>{{bet.homeTeamOdds_bookmaker}}</td>
+          </tr>
+          
+          <tr>
+            <th><a href={{bet.awayTeamOdds_URL}}>{{bet.awayTeamName}}</a></th>
+            <td>{{bet.awayTeamOdds}}</td>
+            <td>{{bet.awayTeamOdds_bookmaker}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="calculation">
+      <span>Profit: {{ bet.profit.toFixed(2) }}%</span>
+      <button type="button" class="btn btn-success" (click)="onClick(bet)" data-toggle="modal" data-target="#exampleModal">
+          Calculator
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div *ngIf="selectedBet != null" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Arbitrage Calculator</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form" novalidate>
+        <input type="number" class="form-control" style="margin-bottom: 5px;"
+          formControlName="stakes" aria-label="Amount (to the nearest dollar)">
+          <!-- <p>Form value: {{ form.value | json }}</p> -->
+        </form>
+        <table class="table-sm" style="width:100%;">
+          <thead>
+            <tr>
+              <th scope="col">Ratio</th>
+              <th scope="col">Stake</th>
+              <th scope="col">Return</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>{{selectedBet.homeTeamOdds}}</th>
+              <td>{{stake1.toFixed(2)}} €</td>
+              <td>{{pReturn.toFixed(2)}} €</td>
+            </tr>
+            
+            <tr>
+              <th>{{selectedBet.awayTeamOdds}}</th>
+              <td>{{stake3.toFixed(2)}} €</td>
+              <td>{{pReturn.toFixed(2)}} €</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div *ngIf="event">
+  <h2 class="page-header">{{event.id}}</h2>
+  <ul class="list-group">
+    <li class="list-group-item">Event: {{event.id}}</li>
+  </ul>
+</div> -->

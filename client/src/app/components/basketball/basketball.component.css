@@ -1,0 +1,21 @@
+.card {
+  margin:0 0 5px 0;
+  color: #5cb85c;
+  background-color: #F0FFF0;
+
+}
+
+.container {
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+}
+
+.container .calculation {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.page-header {
+	color: #5cb85c;
+}

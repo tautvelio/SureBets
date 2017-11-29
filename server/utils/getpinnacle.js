@@ -1,11 +1,10 @@
 var pinnacleAPI = require('./pinnacleAPI');
 var pinnacle = new pinnacleAPI('username', 'password');
 var Promise = require('bluebird');
-var _ = require('lodash');
 
 function getpinnacle() {
 
-    var options = {sportId: 29};
+    var options = {sportId: 29, islive: 0};
 
     const fixtures = new Promise(function(resolve, reject){
 
@@ -14,21 +13,21 @@ function getpinnacle() {
 
         var pinnFixtures = [];
         body.league.forEach(function(leagues){
-          leagues.events.forEach(function(event){ 
+          leagues.events.forEach(function(event){
             if (event.status == 'I'){
               pinnFixtures.push({
                 'id': event.id,
                 'homeTeamName': event.home,
                 'awayTeamName': event.away
               });
-            };    
+            };
           });
         });
         resolve({ pinnFixtures: pinnFixtures });
       });
     });
 
-    var options = {sportId: 29, oddsFormat: "DECIMAL"};
+    var options = {sportId: 29, oddsFormat: "DECIMAL", islive: 0};
 
     const odds = new Promise(function(resolve, reject){
 
@@ -44,8 +43,9 @@ function getpinnacle() {
                   'id': event.id,
                   'homeTeamOdds': period.moneyline.home,
                   'drawOdds': period.moneyline.draw,
-                  'awayTeamOdds': period.moneyline.away
-                }); 
+                  'awayTeamOdds': period.moneyline.away,
+                  'URL': 'https://beta.pinnacle.com/en/Sports/29/Leagues/' + league.id + '/Events/' + event.id  
+                });
               };
             });
           });

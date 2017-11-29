@@ -1,5 +1,5 @@
 //const connection = require('./config/database');
-const events = require('./models/event');
+const events = require('./../models/event');
 
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
@@ -13,7 +13,7 @@ function connection(callback) {
 module.exports = function insertData(pinnacleEvents, topSportEvents) {
     var newConnection = connection(function (err, db) {
         if (err) throw err;
-        
+
         PinnacleFixtures(pinnacleEvents, db);
         TopsportFixtures(topSportEvents, db);
     });
@@ -67,5 +67,3 @@ function PinnacleFixtures(events, db) {
                 })
     })
 }
-
-

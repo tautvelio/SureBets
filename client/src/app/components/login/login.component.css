@@ -1,0 +1,19 @@
+.page-header {
+	color: #5cb85c;
+}
+.form-group {
+	color: #5cb85c;
+   	width: 500px; 
+   	margin: 0 auto;
+}
+.btn {
+	height:30px; 
+    width:100px; 
+    margin: 30px -50px; 
+    position:relative;
+    top:50%; 
+    left:68%;
+}
+.form-control {
+	background-color: #F0FFFF;
+}
